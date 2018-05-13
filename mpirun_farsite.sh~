@@ -1,0 +1,8 @@
+#!/bin/bash
+
+nCores=${1}
+
+mpirun -np ${nCores} ./farsite/farsite4P -f ${nCores} -i 1494275846_152_420/Settings_simulation.txt >/dev/null 2>&1
+
+exit 0
+

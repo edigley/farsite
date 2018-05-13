@@ -1,0 +1,16 @@
+#!/bin/bash
+
+nCores=$1
+nRepetitions=$2
+outputFile=$3
+inputFile=1494275846_152_420/Settings_simulation.txt
+
+echo "repetition nCores" > ${o}
+for repetition in `seq 1 ${nRepetitions}`; do 
+	echo ${repetition}" "${nCores} >> ${outputFile}
+	(time ./mpirun_farsite.sh ${nCores} ${inputFile} >/dev/null 2>&1) &>> ${outputFile} 
+done
+
+exit 0 
+
+
