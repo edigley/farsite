@@ -1,22 +1,22 @@
 /*
  * NOTICE OF RELEASE TO THE PUBLIC DOMAIN
  *
- * This work was created using public funds by employees of the 
- * USDA Forest Service's Fire Science Lab and Systems for Environmental 
- * Management.  It is therefore ineligible for copyright under title 17, 
- * section 105 of the United States Code.  You may treat it as you would 
- * treat any public domain work: it may be used, changed, copied, or 
- * redistributed, with or without permission of the authors, for free or 
- * for compensation.  You may not claim exclusive ownership of this code 
- * because it is already owned by everyone.  Use this software entirely 
+ * This work was created using public funds by employees of the
+ * USDA Forest Service's Fire Science Lab and Systems for Environmental
+ * Management.  It is therefore ineligible for copyright under title 17,
+ * section 105 of the United States Code.  You may treat it as you would
+ * treat any public domain work: it may be used, changed, copied, or
+ * redistributed, with or without permission of the authors, for free or
+ * for compensation.  You may not claim exclusive ownership of this code
+ * because it is already owned by everyone.  Use this software entirely
  * at your own risk.  No warranty of any kind is given.
- * 
- * FARSITE is a trademark owned by Mark Finney.  You may not call derived 
+ *
+ * FARSITE is a trademark owned by Mark Finney.  You may not call derived
  * works by the name FARSITE without explicit written permission.
- * 
- * A copy of 17-USC-105 should have accompanied this distribution in the file 
- * 17USC105.html.  If not, you may access the law via the US Government's 
- * public websites: 
+ *
+ * A copy of 17-USC-105 should have accompanied this distribution in the file
+ * 17USC105.html.  If not, you may access the law via the US Government's
+ * public websites:
  *   - http://www.copyright.gov/title17/92chap1.html#105
  *   - http://www.gpoaccess.gov/uscode/  (enter "17USC105" in the search box.)
  */
@@ -30,64 +30,64 @@
 
 GridTheme::GridTheme()
 {
-	//ramp = 0;
-	RedVal = 50;
-	GreenVal = 0;
-	BlueVal = 0;
-	VarVal = 0;
-	NumColors = 12;
-	MaxBrite = 255;
-	LegendNum = -1;
-	OnOff = false;
-	OnOff3d = false;
-	WantNewRamp = true;                     
-	WantNewColor = false;
-	CatsOK = false;
-	Changed3d = false;
-	ConvertFuelColors = false;
-	Priority = 0;
+    //ramp = 0;
+    RedVal = 50;
+    GreenVal = 0;
+    BlueVal = 0;
+    VarVal = 0;
+    NumColors = 12;
+    MaxBrite = 255;
+    LegendNum = -1;
+    OnOff = false;
+    OnOff3d = false;
+    WantNewRamp = true;
+    WantNewColor = false;
+    CatsOK = false;
+    Changed3d = false;
+    ConvertFuelColors = false;
+    Priority = 0;
 }
 
 GridTheme::~GridTheme()
 {
-	//if (ramp)
-	//	delete ramp;
-	//ramp = 0;
+    //if (ramp)
+    //	delete ramp;
+    //ramp = 0;
 }
 
 void GridTheme::CreateRamp()
 {
-	//bool Reverse = false;
-	//double MinBrite = 20;
-     /*
-	if (ramp)
-	{
-		RedVal = ramp->Rval;
-		GreenVal = ramp->Gval;
-		BlueVal = ramp->Bval;
-		MinBrite = ramp->Min;
-		Reverse = ramp->Reverse;
-		MaxBrite = ramp->Max;
-		delete ramp;
-	}
-	ramp = 0;
-     */
-	if (!Continuous)
-	{
-		NumColors = NumCats;
-		VarVal = 18;
-	}
-	//ramp = new ColorRamp(NumColors, RedVal, GreenVal, BlueVal, VarVal,
-	//			MinBrite, MaxBrite, Reverse);
-	//WantNewRamp=true;
+    //bool Reverse = false;
+    //double MinBrite = 20;
+    /*
+    if (ramp)
+    {
+    	RedVal = ramp->Rval;
+    	GreenVal = ramp->Gval;
+    	BlueVal = ramp->Bval;
+    	MinBrite = ramp->Min;
+    	Reverse = ramp->Reverse;
+    	MaxBrite = ramp->Max;
+    	delete ramp;
+    }
+    ramp = 0;
+        */
+    if (!Continuous)
+    {
+        NumColors = NumCats;
+        VarVal = 18;
+    }
+    //ramp = new ColorRamp(NumColors, RedVal, GreenVal, BlueVal, VarVal,
+    //			MinBrite, MaxBrite, Reverse);
+    //WantNewRamp=true;
 }
 
 
 void GridTheme::DeleteRamp()
 {
-	//if (ramp)
-	//	delete ramp;
-	//ramp = 0;
+    //if (ramp)
+    //	delete ramp;
+    //ramp = 0;
 }
 
 

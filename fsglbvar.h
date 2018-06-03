@@ -1,22 +1,22 @@
 /*
  * NOTICE OF RELEASE TO THE PUBLIC DOMAIN
  *
- * This work was created using public funds by employees of the 
- * USDA Forest Service's Fire Science Lab and Systems for Environmental 
- * Management.  It is therefore ineligible for copyright under title 17, 
- * section 105 of the United States Code.  You may treat it as you would 
- * treat any public domain work: it may be used, changed, copied, or 
- * redistributed, with or without permission of the authors, for free or 
- * for compensation.  You may not claim exclusive ownership of this code 
- * because it is already owned by everyone.  Use this software entirely 
+ * This work was created using public funds by employees of the
+ * USDA Forest Service's Fire Science Lab and Systems for Environmental
+ * Management.  It is therefore ineligible for copyright under title 17,
+ * section 105 of the United States Code.  You may treat it as you would
+ * treat any public domain work: it may be used, changed, copied, or
+ * redistributed, with or without permission of the authors, for free or
+ * for compensation.  You may not claim exclusive ownership of this code
+ * because it is already owned by everyone.  Use this software entirely
  * at your own risk.  No warranty of any kind is given.
- * 
- * FARSITE is a trademark owned by Mark Finney.  You may not call derived 
+ *
+ * FARSITE is a trademark owned by Mark Finney.  You may not call derived
  * works by the name FARSITE without explicit written permission.
- * 
- * A copy of 17-USC-105 should have accompanied this distribution in the file 
- * 17USC105.html.  If not, you may access the law via the US Government's 
- * public websites: 
+ *
+ * A copy of 17-USC-105 should have accompanied this distribution in the file
+ * 17USC105.html.  If not, you may access the law via the US Government's
+ * public websites:
  *   - http://www.copyright.gov/title17/92chap1.html#105
  *   - http://www.gpoaccess.gov/uscode/  (enter "17USC105" in the search box.)
  */
@@ -87,7 +87,7 @@
 #define FM_INTERVAL_ASP		3
 #define FM_INTERVAL_COV		4
 #define RGB(r,g,b) ((unsigned long) (((char)(r) |((unsigned int)(g) << 8 | (((unsigned long)(char) (b)))<<16))))
-		
+
 //#define PI 3.1415926536
 
 //#include "fswindow.h"
@@ -115,7 +115,7 @@ bool 	GetXORArrows();						// check if XOR enabled
 //TThreeDWindow *Get3dWindow();
 //void 	SetFarsiteWindow(TFarsiteWindow* FWindow);		// set landscape window ptr
 //void 	Set3dWindow(TThreeDWindow* DWindow);
-//HBITMAP 	GetBitmap(short Number);			
+//HBITMAP 	GetBitmap(short Number);
 // get 1of3 bitmaps for landscape window
 //void 	SetBitmap(short Number, HBITMAP);			// set 1 of 3 landscape window bitmaps
 //void 	ResetBitmap(short Number);				// reset 1 of 3 landscape window bitmaps
@@ -137,9 +137,9 @@ long		CanSetRasterResolution(long YesNo);		// flag to allow setting of rast res
 long		SetRasterExtentToViewport(long YesNo);		// flag to reduce raster extent for viewport
 void 	SetRastRes(double XResol, double YResol);	// set raster output resolution
 void 	GetRastRes(double *XResol, double *YResol);  // get raster output resolution
-long 	GridInterval(long Interval);				
+long 	GridInterval(long Interval);
 // get & set Grid Interval
-//COLORREF	GridColor(long Colr);					
+//COLORREF	GridColor(long Colr);
 // get & set Grid Color
 long 	TopoShadeDirection(long Direction);		// get & set Light Source Direction
 void 	SetTopoShading(bool YesNo);
@@ -172,7 +172,7 @@ long 	NumFireInterval(long Num);				// num of fire intervals displayed
 long 	OutputFireParam(long Param);				// select fire chx for display
 
 void 	SetCanopyChx(double Height, double CrownBase, double BulkDensity, double Diameter,
-			   long FoliarMoisture, long Tolerance, long Species);
+                     long FoliarMoisture, long Tolerance, long Species);
 double 	GetDefaultCrownHeight();
 double 	GetDefaultCrownBase();
 double 	GetDefaultCrownBD(short cover);
@@ -262,12 +262,12 @@ LandscapeTheme *GetLandscapeTheme();
 
 typedef struct
 {
-     long ID;
-     RasterTheme *theme;
-	void *last;
-     void *next;
-     long Changed;
-     bool Selected;
+    long ID;
+    RasterTheme *theme;
+    void *last;
+    void *next;
+    long Changed;
+    bool Selected;
 } Themes;
 
 double 	QueryRasterMap(Themes *theme, double x, double y);
@@ -286,10 +286,10 @@ double 	QueryRasterOverlay(double Row, double Col);
 */
 typedef struct
 {
-     long ID;
-     VectorTheme theme;
-     void *next;
-     void *last;
+    long ID;
+    VectorTheme theme;
+    void *next;
+    void *last;
 } VectorStorage;
 
 void 	SetNumVectorThemes(long number);
@@ -304,22 +304,24 @@ void 	FreeAllVectorThemes();
 
 
 typedef struct
-{// structure for holding weather/wind stream data max and min values
-	int 	wtr;
-	int 	wnd;
-	int 	all;
-}streamdata;
+{
+    // structure for holding weather/wind stream data max and min values
+    int 	wtr;
+    int 	wnd;
+    int 	all;
+} streamdata;
 
 
 typedef struct
-{// wind data structure
-	long 	mo;
-	long 	dy;
-	long 	hr;
-	double 	ws;		// windspeed mph
-	long 	wd;		// winddirection azimuth
-	long 	cl;		// cloudiness
-}WindData;
+{
+    // wind data structure
+    long 	mo;
+    long 	dy;
+    long 	hr;
+    double 	ws;		// windspeed mph
+    long 	wd;		// winddirection azimuth
+    long 	cl;		// cloudiness
+} WindData;
 
 bool 	CalcFirstLastStreamData();		// compute 1st and last valid dates for simulation
 void		SetCorrectStreamNumbers();		// for Atm Grid to fool stream data
@@ -327,7 +329,7 @@ long 	GetOpenWindStation();
 long 	AllocWindData(long StatNum, long NumObs);
 void 	FreeWindData(long StationNumber);
 long 	SetWindData(long StationNumber, long NumObs, long month, long day,
-				  long hour, double windspd, long winddir, long cloudy);
+                    long hour, double windspd, long winddir, long cloudy);
 long 	GetWindMonth(long StationNumber, long NumObs);
 long 	GetWindDay(long StationNumber, long NumObs);
 long 	GetWindHour(long StationNumber, long NumObs);
@@ -342,26 +344,26 @@ long 	GetWeatherUnits(long StationNumber);
 
 typedef struct
 {
-	long 	mo;
-	long 	dy;
-	double 	rn;
-	long 	t1;
-	long 	t2;
-	double 	T1;
-	double 	T2;
-	long 	H1;
-	long 	H2;
-	double 	el;
-     long 	tr1;
-     long		tr2;
+    long 	mo;
+    long 	dy;
+    double 	rn;
+    long 	t1;
+    long 	t2;
+    double 	T1;
+    double 	T2;
+    long 	H1;
+    long 	H2;
+    double 	el;
+    long 	tr1;
+    long		tr2;
 } WeatherData;
 
 long 	GetOpenWeatherStation();
 long 	AllocWeatherData(long StatNum, long NumObs);
 void 	FreeWeatherData(long StationNumber);
 long 	SetWeatherData(long StationNumber, long NumObs, long month, long day,
-					double rain, long time1, long time2, double temp1, double temp2,
-					long humid1, long humid2, double elevation, long tr1, long tr2);
+                       double rain, long time1, long time2, double temp1, double temp2,
+                       long humid1, long humid2, double elevation, long tr1, long tr2);
 long 	GetWeatherMonth(long StationNumber, long NumObs);
 long 	GetWeatherDay(long StationNumber, long NumObs);
 double 	GetWeatherRain(long StationNumber, long NumObs);
@@ -377,13 +379,13 @@ long 	GetMaxWeatherObs(long StationNumber);
 
 struct StationGrid
 {
-	long 	XDim;                 // number of Easting cells
-	long 	YDim;                 // number of Northing cells
-	double 	Width;              // width of grid cell
-	double 	Height;             // height of grid cell
-	long 	*Grid;                // holds weather/wind station numbers
-	StationGrid();
-	~StationGrid();
+    long 	XDim;                 // number of Easting cells
+    long 	YDim;                 // number of Northing cells
+    double 	Width;              // width of grid cell
+    double 	Height;             // height of grid cell
+    long 	*Grid;                // holds weather/wind station numbers
+    StationGrid();
+    ~StationGrid();
 };
 
 void 	AllocStationGrid(long XDim, long YDim);	 // allocate memory for weather stations
@@ -432,8 +434,8 @@ struct CanopyCharacteristics
 
 struct FuelConversions
 {
-	int Type[257];            // each fuel type contains a fuel model corresponding
-	FuelConversions();		 // load defaults
+    int Type[257];            // each fuel type contains a fuel model corresponding
+    FuelConversions();		 // load defaults
 };
 
 /*
@@ -486,15 +488,16 @@ private:
 */
 
 typedef struct
-{// structure for holding basic cell information
-	long x;				// easting
-	long y;                  // northing
-	short e;                 // elevation
-	short s;                 // slope
-	short a;                 // aspect
-	short f;                 // fuel models
-	short c;                 // canopy cover
-}oldcelldata;
+{
+    // structure for holding basic cell information
+    long x;				// easting
+    long y;                  // northing
+    short e;                 // elevation
+    short s;                 // slope
+    short a;                 // aspect
+    short f;                 // fuel models
+    short c;                 // canopy cover
+} oldcelldata;
 
 // Moved to FSXLANDT.H
 /*
@@ -524,252 +527,258 @@ typedef struct
 */
 
 typedef struct
-{// header for landscape file
-	long CrownFuels;
-	long latitude;
-	long loeast;
-	long hieast;
-	long lonorth;
-	long hinorth;
-	long loelev;
-	long hielev;
-	long numeast;
-	long numnorth;
-	double EastUtm;
-	double WestUtm;
-	double NorthUtm;
-	double SouthUtm;
-	long GridUnits;        // 0 for metric, 1 for English
-	double XResol;
-	double YResol;
-	short EUnits;
-	short SUnits;
-	short AUnits;
-	short FOptions;
-	short CUnits;
-	short HUnits;
-	short BUnits;
-	short PUnits;
-}oldheaddata;
-
-
-typedef struct
-{// header for landscape file
-	long CrownFuels;       // 10 if no crown fuels, 11 if crown fuels exist
-	long latitude;
-	double loeast;
-	double hieast;
-	double lonorth;
-	double hinorth;
-	long loelev;
-	long hielev;
-	long numeast;
-	long numnorth;
-	double EastUtm;
-	double WestUtm;
-	double NorthUtm;
-	double SouthUtm;
-	long GridUnits;        // 0 for metric, 1 for English
-	double XResol;
-	double YResol;
-	short EUnits;
-	short SUnits;
-	short AUnits;
-	short FOptions;
-	short CUnits;
-	short HUnits;
-	short BUnits;
-	short PUnits;
-}headdata2;
-
-typedef struct
-{// header for landscape file
-	int32_t CrownFuels;//4         // 20 if no crown fuels, 21 if crown fuels exist
-     int32_t GroundFuels;//4		// 20 if no ground fuels, 21 if ground fuels exist
-	int32_t latitude;//4
-	double loeast;//8
-	double hieast;//8
-	double lonorth;//8
-	double hinorth;//8
-	int32_t loelev;//4
-	int32_t hielev;//4
-	int32_t numelev; //4			//-1 if more than 100 categories
-     int32_t elevs[100];//400
-     int32_t loslope;//4
-     int32_t hislope;//4
-     int32_t numslope;//4			//-1 if more than 100 categories
-     int32_t slopes[100];//400
-     int32_t loaspect;//4
-     int32_t hiaspect;//4
-     int32_t numaspect;	//4	//-1 if more than 100 categories
-     int32_t aspects[100];//400
-     int32_t lofuel;//4
-     int32_t hifuel;//4
-     int32_t numfuel;	//4		//-1 if more than 100 categories
-     int32_t fuels[100];//400
-     int32_t locover;//4
-     int32_t hicover;//4
-     int32_t numcover;//4			//-1 if more than 100 categories
-     int32_t covers[100];//400
-     int32_t loheight;//4
-     int32_t hiheight;//4
-     int32_t numheight;	//4	//-1 if more than 100 categories
-     int32_t heights[100];//400
-     int32_t lobase;//4
-     int32_t hibase;//4
-     int32_t numbase;	//4		//-1 if more than 100 categories
-     int32_t bases[100];//400
-     int32_t lodensity;//4
-     int32_t hidensity;//4
-     int32_t numdensity;//4		//-1 if more than 100 categories
-     int32_t densities[100];//400
-     int32_t loduff;//4
-     int32_t hiduff;//4
-     int32_t numduff;	//4		//-1 if more than 100 categories
-     int32_t duffs[100];//400
-     int32_t lowoody;//4
-     int32_t hiwoody;//4
-     int32_t numwoody;	//4		//-1 if more than 100 categories
-     int32_t woodies[100];//400
-	int32_t numeast;//4
-	int32_t numnorth;//4
-	double EastUtm;//8
-	double WestUtm;//8
-	double NorthUtm;//8
-	double SouthUtm;//8
-	int32_t GridUnits; //4       // 0 for metric, 1 for English
-	double XResol;//8
-	double YResol;//8
-	int16_t EUnits;//2
-	int16_t SUnits;//2
-	int16_t AUnits;//2
-	int16_t FOptions;//2
-	int16_t CUnits;//2
-	int16_t HUnits;//2
-	int16_t BUnits;//2
-	int16_t PUnits;//2
-     int16_t DUnits;//2
-     int16_t WOptions;//2
-     char ElevFile[256];//256
-     char SlopeFile[256];//256
-     char AspectFile[256];//256
-     char FuelFile[256];//256
-     char CoverFile[256];//256
-     char HeightFile[256];//256
-     char BaseFile[256];//256
-     char DensityFile[256];//256
-     char DuffFile[256];//256
-     char WoodyFile[256];//256
-     char Description[512];//512
-}__attribute__((aligned(4),packed)) headdata32bit;
-
-
-typedef struct
-{// structure for holding basic cell information
-	int16_t e;                 // elevation
-	int16_t s;                 // slope
-	int16_t a;                 // aspect
-	int16_t f;                 // fuel models
-	int16_t c;                 // canopy cover
-}celldata32bits;
-
-
-typedef struct
-{// structure for holding optional crown fuel information
-	int16_t h;				// canopy height
-	int16_t b;				// crown base
-	int16_t p;				// bulk density
-}crowndata32bits;
+{
+    // header for landscape file
+    long CrownFuels;
+    long latitude;
+    long loeast;
+    long hieast;
+    long lonorth;
+    long hinorth;
+    long loelev;
+    long hielev;
+    long numeast;
+    long numnorth;
+    double EastUtm;
+    double WestUtm;
+    double NorthUtm;
+    double SouthUtm;
+    long GridUnits;        // 0 for metric, 1 for English
+    double XResol;
+    double YResol;
+    short EUnits;
+    short SUnits;
+    short AUnits;
+    short FOptions;
+    short CUnits;
+    short HUnits;
+    short BUnits;
+    short PUnits;
+} oldheaddata;
 
 
 typedef struct
 {
-     int16_t d;				// duff model
-      int16_t w;				// coarse woody model
-}grounddata32bits;
+    // header for landscape file
+    long CrownFuels;       // 10 if no crown fuels, 11 if crown fuels exist
+    long latitude;
+    double loeast;
+    double hieast;
+    double lonorth;
+    double hinorth;
+    long loelev;
+    long hielev;
+    long numeast;
+    long numnorth;
+    double EastUtm;
+    double WestUtm;
+    double NorthUtm;
+    double SouthUtm;
+    long GridUnits;        // 0 for metric, 1 for English
+    double XResol;
+    double YResol;
+    short EUnits;
+    short SUnits;
+    short AUnits;
+    short FOptions;
+    short CUnits;
+    short HUnits;
+    short BUnits;
+    short PUnits;
+} headdata2;
+
+typedef struct
+{
+    // header for landscape file
+    int32_t CrownFuels;//4         // 20 if no crown fuels, 21 if crown fuels exist
+    int32_t GroundFuels;//4		// 20 if no ground fuels, 21 if ground fuels exist
+    int32_t latitude;//4
+    double loeast;//8
+    double hieast;//8
+    double lonorth;//8
+    double hinorth;//8
+    int32_t loelev;//4
+    int32_t hielev;//4
+    int32_t numelev; //4			//-1 if more than 100 categories
+    int32_t elevs[100];//400
+    int32_t loslope;//4
+    int32_t hislope;//4
+    int32_t numslope;//4			//-1 if more than 100 categories
+    int32_t slopes[100];//400
+    int32_t loaspect;//4
+    int32_t hiaspect;//4
+    int32_t numaspect;	//4	//-1 if more than 100 categories
+    int32_t aspects[100];//400
+    int32_t lofuel;//4
+    int32_t hifuel;//4
+    int32_t numfuel;	//4		//-1 if more than 100 categories
+    int32_t fuels[100];//400
+    int32_t locover;//4
+    int32_t hicover;//4
+    int32_t numcover;//4			//-1 if more than 100 categories
+    int32_t covers[100];//400
+    int32_t loheight;//4
+    int32_t hiheight;//4
+    int32_t numheight;	//4	//-1 if more than 100 categories
+    int32_t heights[100];//400
+    int32_t lobase;//4
+    int32_t hibase;//4
+    int32_t numbase;	//4		//-1 if more than 100 categories
+    int32_t bases[100];//400
+    int32_t lodensity;//4
+    int32_t hidensity;//4
+    int32_t numdensity;//4		//-1 if more than 100 categories
+    int32_t densities[100];//400
+    int32_t loduff;//4
+    int32_t hiduff;//4
+    int32_t numduff;	//4		//-1 if more than 100 categories
+    int32_t duffs[100];//400
+    int32_t lowoody;//4
+    int32_t hiwoody;//4
+    int32_t numwoody;	//4		//-1 if more than 100 categories
+    int32_t woodies[100];//400
+    int32_t numeast;//4
+    int32_t numnorth;//4
+    double EastUtm;//8
+    double WestUtm;//8
+    double NorthUtm;//8
+    double SouthUtm;//8
+    int32_t GridUnits; //4       // 0 for metric, 1 for English
+    double XResol;//8
+    double YResol;//8
+    int16_t EUnits;//2
+    int16_t SUnits;//2
+    int16_t AUnits;//2
+    int16_t FOptions;//2
+    int16_t CUnits;//2
+    int16_t HUnits;//2
+    int16_t BUnits;//2
+    int16_t PUnits;//2
+    int16_t DUnits;//2
+    int16_t WOptions;//2
+    char ElevFile[256];//256
+    char SlopeFile[256];//256
+    char AspectFile[256];//256
+    char FuelFile[256];//256
+    char CoverFile[256];//256
+    char HeightFile[256];//256
+    char BaseFile[256];//256
+    char DensityFile[256];//256
+    char DuffFile[256];//256
+    char WoodyFile[256];//256
+    char Description[512];//512
+} __attribute__((aligned(4),packed)) headdata32bit;
+
+
+typedef struct
+{
+    // structure for holding basic cell information
+    int16_t e;                 // elevation
+    int16_t s;                 // slope
+    int16_t a;                 // aspect
+    int16_t f;                 // fuel models
+    int16_t c;                 // canopy cover
+} celldata32bits;
+
+
+typedef struct
+{
+    // structure for holding optional crown fuel information
+    int16_t h;				// canopy height
+    int16_t b;				// crown base
+    int16_t p;				// bulk density
+} crowndata32bits;
+
+
+typedef struct
+{
+    int16_t d;				// duff model
+    int16_t w;				// coarse woody model
+} grounddata32bits;
 
 
 
 typedef struct
-{// header for landscape file
-	long CrownFuels;         // 20 if no crown fuels, 21 if crown fuels exist
-     long GroundFuels;		// 20 if no ground fuels, 21 if ground fuels exist
-	long latitude;
-	double loeast;
-	double hieast;
-	double lonorth;
-	double hinorth;
-	long loelev;
-	long hielev;
-	long numelev; 			//-1 if more than 100 categories
-     long elevs[100];
-     long loslope;
-     long hislope;
-     long numslope;			//-1 if more than 100 categories
-     long slopes[100];
-     long loaspect;
-     long hiaspect;
-     long numaspect;		//-1 if more than 100 categories
-     long aspects[100];
-     long lofuel;
-     long hifuel;
-     long numfuel;			//-1 if more than 100 categories
-     long fuels[100];
-     long locover;
-     long hicover;
-     long numcover;			//-1 if more than 100 categories
-     long covers[100];
-     long loheight;
-     long hiheight;
-     long numheight;		//-1 if more than 100 categories
-     long heights[100];
-     long lobase;
-     long hibase;
-     long numbase;			//-1 if more than 100 categories
-     long bases[100];
-     long lodensity;
-     long hidensity;
-     long numdensity;		//-1 if more than 100 categories
-     long densities[100];
-     long loduff;
-     long hiduff;
-     long numduff;			//-1 if more than 100 categories
-     long duffs[100];
-     long lowoody;
-     long hiwoody;
-     long numwoody;			//-1 if more than 100 categories
-     long woodies[100];
-	long numeast;
-	long numnorth;
-	double EastUtm;
-	double WestUtm;
-	double NorthUtm;
-	double SouthUtm;
-	long GridUnits;        // 0 for metric, 1 for English
-	double XResol;
-	double YResol;
-	short EUnits;
-	short SUnits;
-	short AUnits;
-	short FOptions;
-	short CUnits;
-	short HUnits;
-	short BUnits;
-	short PUnits;
-     short DUnits;
-     short WOptions;
-     char ElevFile[256];
-     char SlopeFile[256];
-     char AspectFile[256];
-     char FuelFile[256];
-     char CoverFile[256];
-     char HeightFile[256];
-     char BaseFile[256];
-     char DensityFile[256];
-     char DuffFile[256];
-     char WoodyFile[256];
-     char Description[512];
-}headdata;
+{
+    // header for landscape file
+    long CrownFuels;         // 20 if no crown fuels, 21 if crown fuels exist
+    long GroundFuels;		// 20 if no ground fuels, 21 if ground fuels exist
+    long latitude;
+    double loeast;
+    double hieast;
+    double lonorth;
+    double hinorth;
+    long loelev;
+    long hielev;
+    long numelev; 			//-1 if more than 100 categories
+    long elevs[100];
+    long loslope;
+    long hislope;
+    long numslope;			//-1 if more than 100 categories
+    long slopes[100];
+    long loaspect;
+    long hiaspect;
+    long numaspect;		//-1 if more than 100 categories
+    long aspects[100];
+    long lofuel;
+    long hifuel;
+    long numfuel;			//-1 if more than 100 categories
+    long fuels[100];
+    long locover;
+    long hicover;
+    long numcover;			//-1 if more than 100 categories
+    long covers[100];
+    long loheight;
+    long hiheight;
+    long numheight;		//-1 if more than 100 categories
+    long heights[100];
+    long lobase;
+    long hibase;
+    long numbase;			//-1 if more than 100 categories
+    long bases[100];
+    long lodensity;
+    long hidensity;
+    long numdensity;		//-1 if more than 100 categories
+    long densities[100];
+    long loduff;
+    long hiduff;
+    long numduff;			//-1 if more than 100 categories
+    long duffs[100];
+    long lowoody;
+    long hiwoody;
+    long numwoody;			//-1 if more than 100 categories
+    long woodies[100];
+    long numeast;
+    long numnorth;
+    double EastUtm;
+    double WestUtm;
+    double NorthUtm;
+    double SouthUtm;
+    long GridUnits;        // 0 for metric, 1 for English
+    double XResol;
+    double YResol;
+    short EUnits;
+    short SUnits;
+    short AUnits;
+    short FOptions;
+    short CUnits;
+    short HUnits;
+    short BUnits;
+    short PUnits;
+    short DUnits;
+    short WOptions;
+    char ElevFile[256];
+    char SlopeFile[256];
+    char AspectFile[256];
+    char FuelFile[256];
+    char CoverFile[256];
+    char HeightFile[256];
+    char BaseFile[256];
+    char DensityFile[256];
+    char DuffFile[256];
+    char WoodyFile[256];
+    char Description[512];
+} headdata;
 
 
 bool		TestForLCPVersion1();
@@ -830,7 +839,7 @@ double 	ConvertEastingOffsetToUtm(double input);
 double 	ConvertNorthingOffsetToUtm(double input);
 double 	ConvertUtmToEastingOffset(double input);
 double 	ConvertUtmToNorthingOffset(double input);
-char*	GetHeaderDescription();		
+char*	GetHeaderDescription();
 
 long		GetConditMonth();
 long		GetConditDay();
@@ -898,17 +907,17 @@ long AtmosphereGridExists();
 
 typedef struct
 {
-	long Month;
-     long Day;
-     long Start;
-     long End;
+    long Month;
+    long Day;
+    long Start;
+    long End;
 } AbsoluteBurnPeriod;
 
 
 typedef struct
 {
-	double Start;
-     double End;
+    double Start;
+    double End;
 } RelativeBurnPeriod;
 
 void AddDownTime(double time);
@@ -930,13 +939,14 @@ bool CheckBurnPeriod(long mo1, long dy1, long mo2, long dy2);
 //----------------------------------------------------------
 
 typedef struct
-{// initial fuel moistures by fuel type
-	bool FuelMoistureIsHere;
-	long TL1;
-	long TL10;
-	long TL100;
-	long TLLH;
-	long TLLW;
+{
+    // initial fuel moistures by fuel type
+    bool FuelMoistureIsHere;
+    long TL1;
+    long TL10;
+    long TL100;
+    long TLLH;
+    long TLLW;
 } InitialFuelMoisture;
 
 
@@ -960,24 +970,24 @@ bool InitialFuelMoistureIsHere(long Model);
 
 typedef struct
 {
-     double SurfaceAreaToVolume;
-     double Load;
-     double HeatContent;
-     double Density;
-     double FuelMoisture;
+    double SurfaceAreaToVolume;
+    double Load;
+    double HeatContent;
+    double Density;
+    double FuelMoisture;
 } WoodyData;
 
 
 struct CoarseWoody
 {
-	long Units;
-     double Depth;
-     double TotalWeight;
-	long NumClasses;
-     char Description[64];
-     WoodyData *wd;
+    long Units;
+    double Depth;
+    double TotalWeight;
+    long NumClasses;
+    char Description[64];
+    WoodyData *wd;
 
-     CoarseWoody();
+    CoarseWoody();
 };
 
 
@@ -1014,23 +1024,23 @@ bool CanAssignProcessor();
 
 typedef struct
 {
-     long number;
-     char code[8];
-     double h1;
-     double h10;
-     double h100;
-     double lh;
-     double lw;
-     long dynamic;
-     long sav1;
-     long savlh;
-     long savlw;
-     double depth;
-     double xmext;
-     double heatd;
-     double heatl;
-     char desc[256];
-}NewFuel;
+    long number;
+    char code[8];
+    double h1;
+    double h10;
+    double h100;
+    double lh;
+    double lw;
+    long dynamic;
+    long sav1;
+    long savlh;
+    long savlw;
+    double depth;
+    double xmext;
+    double heatd;
+    double heatl;
+    char desc[256];
+} NewFuel;
 
 void ResetNewFuels();
 bool SetNewFuel(NewFuel *newfuel);

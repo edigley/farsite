@@ -1,22 +1,22 @@
 /*
  * NOTICE OF RELEASE TO THE PUBLIC DOMAIN
  *
- * This work was created using public funds by employees of the 
- * USDA Forest Service's Fire Science Lab and Systems for Environmental 
- * Management.  It is therefore ineligible for copyright under title 17, 
- * section 105 of the United States Code.  You may treat it as you would 
- * treat any public domain work: it may be used, changed, copied, or 
- * redistributed, with or without permission of the authors, for free or 
- * for compensation.  You may not claim exclusive ownership of this code 
- * because it is already owned by everyone.  Use this software entirely 
+ * This work was created using public funds by employees of the
+ * USDA Forest Service's Fire Science Lab and Systems for Environmental
+ * Management.  It is therefore ineligible for copyright under title 17,
+ * section 105 of the United States Code.  You may treat it as you would
+ * treat any public domain work: it may be used, changed, copied, or
+ * redistributed, with or without permission of the authors, for free or
+ * for compensation.  You may not claim exclusive ownership of this code
+ * because it is already owned by everyone.  Use this software entirely
  * at your own risk.  No warranty of any kind is given.
- * 
- * FARSITE is a trademark owned by Mark Finney.  You may not call derived 
+ *
+ * FARSITE is a trademark owned by Mark Finney.  You may not call derived
  * works by the name FARSITE without explicit written permission.
- * 
- * A copy of 17-USC-105 should have accompanied this distribution in the file 
- * 17USC105.html.  If not, you may access the law via the US Government's 
- * public websites: 
+ *
+ * A copy of 17-USC-105 should have accompanied this distribution in the file
+ * 17USC105.html.  If not, you may access the law via the US Government's
+ * public websites:
  *   - http://www.copyright.gov/title17/92chap1.html#105
  *   - http://www.gpoaccess.gov/uscode/  (enter "17USC105" in the search box.)
  */
@@ -71,7 +71,7 @@ double** matrix(long nrl, long nrh, long ncl, long nch);
 double** dmatrix(long nrl, long nrh, long ncl, long nch);
 long** imatrix(long nrl, long nrh, long ncl, long nch);
 double** submatrix(double** a, long oldrl, long oldrh, long oldcl, long oldc,
-	long newrl, long newcl);
+                   long newrl, long newcl);
 double** convert_matrix(double* a, long nrl, long nrh, long ncl, long nch);
 double*** f3tensor(long nrl, long nrh, long ncl, long nch, long ndl, long ndh);
 void free_fvector(float* v, long nl, long nh);
@@ -87,7 +87,7 @@ void free_imatrix(long** m, long nrl, long nrh, long ncl, long nch);
 void free_submatrix(double** b, long nrl, long nrh, long ncl, long nch);
 void free_convert_matrix(double** b, long nrl, long nrh, long ncl, long nch);
 void free_f3tensor(double*** t, long nrl, long nrh, long ncl, long nch,
-	long ndl, long ndh);
+                   long ndl, long ndh);
 
 //#else
 

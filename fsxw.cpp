@@ -1,22 +1,22 @@
 /*
  * NOTICE OF RELEASE TO THE PUBLIC DOMAIN
  *
- * This work was created using public funds by employees of the 
- * USDA Forest Service's Fire Science Lab and Systems for Environmental 
- * Management.  It is therefore ineligible for copyright under title 17, 
- * section 105 of the United States Code.  You may treat it as you would 
- * treat any public domain work: it may be used, changed, copied, or 
- * redistributed, with or without permission of the authors, for free or 
- * for compensation.  You may not claim exclusive ownership of this code 
- * because it is already owned by everyone.  Use this software entirely 
+ * This work was created using public funds by employees of the
+ * USDA Forest Service's Fire Science Lab and Systems for Environmental
+ * Management.  It is therefore ineligible for copyright under title 17,
+ * section 105 of the United States Code.  You may treat it as you would
+ * treat any public domain work: it may be used, changed, copied, or
+ * redistributed, with or without permission of the authors, for free or
+ * for compensation.  You may not claim exclusive ownership of this code
+ * because it is already owned by everyone.  Use this software entirely
  * at your own risk.  No warranty of any kind is given.
- * 
- * FARSITE is a trademark owned by Mark Finney.  You may not call derived 
+ *
+ * FARSITE is a trademark owned by Mark Finney.  You may not call derived
  * works by the name FARSITE without explicit written permission.
- * 
- * A copy of 17-USC-105 should have accompanied this distribution in the file 
- * 17USC105.html.  If not, you may access the law via the US Government's 
- * public websites: 
+ *
+ * A copy of 17-USC-105 should have accompanied this distribution in the file
+ * 17USC105.html.  If not, you may access the law via the US Government's
+ * public websites:
  *   - http://www.copyright.gov/title17/92chap1.html#105
  *   - http://www.gpoaccess.gov/uscode/  (enter "17USC105" in the search box.)
  */
@@ -77,351 +77,351 @@ static bool StopEnabled[MAXNUM_STOPLOCATIONS];
 
 bool AccelerationON()
 {
-	return AccelerationState;
+    return AccelerationState;
 }
 
 void SetAccelerationON(bool State)
 {
-	AccelerationState = State;
+    AccelerationState = State;
 }
 
 
 void InitializeRosRed()
 {
-	for (long i = 0; i < 257; i++)
-		redros[i] = 1.0;
+    for (long i = 0; i < 257; i++)
+        redros[i] = 1.0;
 }
 
 
 double GetRosRed(int fuel)
 {
-	if (redros[fuel] > 0.0)
-		return redros[fuel];
-	else
-		return 1.0;
+    if (redros[fuel] > 0.0)
+        return redros[fuel];
+    else
+        return 1.0;
 }
 
 void SetRosRed(int fuel, double rosred)
 {
-	redros[fuel] = fabs(rosred);
+    redros[fuel] = fabs(rosred);
 }
 
 long GetInout(long FireNumber)
 {
-	return inout[FireNumber];
+    return inout[FireNumber];
 }
 
 void SetInout(long FireNumber, int Inout)
 {
-	inout[FireNumber] = Inout;
+    inout[FireNumber] = Inout;
 }
 
 long GetNumPoints(long FireNumber)
 {
-	return numpts[FireNumber];
+    return numpts[FireNumber];
 }
 
 void SetNumPoints(long FireNumber, long NumPoints)
 {
-	numpts[FireNumber] = NumPoints;
+    numpts[FireNumber] = NumPoints;
 }
 
 double PercentIgnition(double percent)
 {
-	if (percent >= 0.01 && percent <= 100.0)
-		PercentageOfEmberIgnitions = percent;
-	else if (percent >= 0.0 && percent < 0.01)
-		PercentageOfEmberIgnitions = 0.01;
-	else if (percent > 100.0)
-		PercentageOfEmberIgnitions = 100.0;
+    if (percent >= 0.01 && percent <= 100.0)
+        PercentageOfEmberIgnitions = percent;
+    else if (percent >= 0.0 && percent < 0.01)
+        PercentageOfEmberIgnitions = 0.01;
+    else if (percent > 100.0)
+        PercentageOfEmberIgnitions = 100.0;
 
-	return PercentageOfEmberIgnitions;
+    return PercentageOfEmberIgnitions;
 }
 
 
 double IgnitionDelay(double delay)
 {
-	if (delay >= 0.0)
-		SpotIgnitionDelay = delay;
+    if (delay >= 0.0)
+        SpotIgnitionDelay = delay;
 
-	return SpotIgnitionDelay;
+    return SpotIgnitionDelay;
 }
 
 
 bool EnableCrowning(long Crowning)
 {
-	if (Crowning >= 0)
-		CrowningOK = (bool) Crowning;
+    if (Crowning >= 0)
+        CrowningOK = (bool) Crowning;
 
-	return CrowningOK;
+    return CrowningOK;
 }
 
 long	GetCrownFireCalculation()
 {
-	return CrownFireCalculation;
+    return CrownFireCalculation;
 }
 
 
 long	SetCrownFireCalculation(long Type)
 {
-	CrownFireCalculation=Type;
+    CrownFireCalculation=Type;
 
-	return CrownFireCalculation;
+    return CrownFireCalculation;
 }
 
 
 bool EnableSpotting(long Spotting)
 {
-	if (Spotting >= 0)
-		SpottingOK = (bool) Spotting;
+    if (Spotting >= 0)
+        SpottingOK = (bool) Spotting;
 
-	return SpottingOK;
+    return SpottingOK;
 }
 
 bool EnableSpotFireGrowth(long Growth)
 {
-	if (Growth >= 0)
-		SpotGrowthOK = (bool) Growth;
+    if (Growth >= 0)
+        SpotGrowthOK = (bool) Growth;
 
-	return SpotGrowthOK;
+    return SpotGrowthOK;
 }
 
 bool ConstantBackingSpreadRate(long Back)
 {
-	if (Back >= 0)
-		ConstBack = (bool) Back;
+    if (Back >= 0)
+        ConstBack = (bool) Back;
 
-	return ConstBack;
+    return ConstBack;
 }
 
 
 bool CreateSpotSemaphore()
 {
-	CloseSpotSemaphore();
-     /*
-	char Name[128] = "";
-	char TimeID[128] = "";
-	SYSTEMTIME st;
-	GetSystemTime(&st);
-	sprintf(TimeID, "%ld%ld%ld%ld%ld%ld%ld", st.wYear, st.wMonth, st.wDay,
-		st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
+    CloseSpotSemaphore();
+    /*
+    char Name[128] = "";
+    char TimeID[128] = "";
+    SYSTEMTIME st;
+    GetSystemTime(&st);
+    sprintf(TimeID, "%ld%ld%ld%ld%ld%ld%ld", st.wYear, st.wMonth, st.wDay,
+    	st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
 
-	sprintf(Name, "%s%s", "SPOTSEMAPHORE", TimeID);
-	hNewSpotSemaphore = CreateSemaphore(NULL, 1, 1, Name);
+    sprintf(Name, "%s%s", "SPOTSEMAPHORE", TimeID);
+    hNewSpotSemaphore = CreateSemaphore(NULL, 1, 1, Name);
 
-	sprintf(Name, "%s%s", "NEWP1SEMAPHORE", TimeID);
-	hNewPerimSemaphore = CreateSemaphore(NULL, 1, 1, Name);
+    sprintf(Name, "%s%s", "NEWP1SEMAPHORE", TimeID);
+    hNewPerimSemaphore = CreateSemaphore(NULL, 1, 1, Name);
 
-	if (hNewSpotSemaphore == NULL)
-		return false;
-	if (hNewPerimSemaphore == NULL)
-		return false;
-     */
-	return true;
+    if (hNewSpotSemaphore == NULL)
+    	return false;
+    if (hNewPerimSemaphore == NULL)
+    	return false;
+        */
+    return true;
 }
 
 void CloseSpotSemaphore()
 {
-	/*
-	if (hNewSpotSemaphore != NULL)
-		CloseHandle(hNewSpotSemaphore);
-	hNewSpotSemaphore = 0;
-	if (hNewPerimSemaphore != NULL)
-		CloseHandle(hNewPerimSemaphore);
-	hNewPerimSemaphore = 0;
+    /*
+    if (hNewSpotSemaphore != NULL)
+    	CloseHandle(hNewSpotSemaphore);
+    hNewSpotSemaphore = 0;
+    if (hNewPerimSemaphore != NULL)
+    	CloseHandle(hNewPerimSemaphore);
+    hNewPerimSemaphore = 0;
      */
 }
 
 long GetNumFires()
 {
-	return numfires;
+    return numfires;
 }
 
 void SetNumFires(long input)
 {
-	numfires = input;
+    numfires = input;
 }
 
 void IncNumFires(long MoreFires)
 {
-	numfires += MoreFires;
+    numfires += MoreFires;
 }
 
 long GetNewFires()
 {
-	return newfires;
+    return newfires;
 }
 
 void SetNewFires(long input)
 {
 //	WaitForSingleObject(hNewSpotSemaphore, INFINITE);
-	newfires = input;
-	numspots = input;
+    newfires = input;
+    numspots = input;
 //	ReleaseSemaphore(hNewSpotSemaphore, 1, &prevct);
 }
 
 void IncNewFires(long increment)
 {
 //	WaitForSingleObject(hNewSpotSemaphore, INFINITE);
-	newfires += increment;
-	numspots = newfires;
+    newfires += increment;
+    numspots = newfires;
 //	ReleaseSemaphore(hNewSpotSemaphore, 1, &prevct);
 }
 
 void GetNumSpots(long* num, bool inc)
 {
 //	WaitForSingleObject(hNewSpotSemaphore, INFINITE);
-	*num = numspots;
-	if (inc)
-	{
-		numspots++;
-		newfires = numspots;
-	}
+    *num = numspots;
+    if (inc)
+    {
+        numspots++;
+        newfires = numspots;
+    }
 //	ReleaseSemaphore(hNewSpotSemaphore, 1, &prevct);
 }
 
 void SetNumSpots(long input)
 {
 //	WaitForSingleObject(hNewSpotSemaphore, INFINITE);
-	numspots = input;
+    numspots = input;
 //	ReleaseSemaphore(hNewSpotSemaphore, 1, &prevct);
 }
 
 long GetSkipFires()
 {
-	return skipfire;
+    return skipfire;
 }
 
 void SetSkipFires(long newvalue)
 {
 //	WaitForSingleObject(hNewPerimSemaphore, INFINITE);
-	skipfire = newvalue;
+    skipfire = newvalue;
 //	ReleaseSemaphore(hNewPerimSemaphore, 1, &prevct);
 }
 
 void IncSkipFires(long increment)
 {
 //	WaitForSingleObject(hNewPerimSemaphore, INFINITE);
-	skipfire += increment;
+    skipfire += increment;
 //	ReleaseSemaphore(hNewPerimSemaphore, 1, &prevct);
 }
 
 double GetPerimRes()
 {
-	return PerimeterResolution;
+    return PerimeterResolution;
 }
 
 void SetPerimRes(double input)
 {
-	PerimeterResolution = input;
+    PerimeterResolution = input;
 }
 
 
 double GetDynamicDistRes()
 {
-	return DynamicDistanceResolution;
+    return DynamicDistanceResolution;
 }
 
 
 void SetDynamicDistRes(double input)
 {
-	DynamicDistanceResolution = input;
+    DynamicDistanceResolution = input;
 }
 
 
 double GetDistRes()
 {
-	return DistanceResolution;
+    return DistanceResolution;
 }
 
 void SetDistRes(double input)
 {
-	DistanceResolution = DynamicDistanceResolution = input; 	 // set both default and dynamic min dist
+    DistanceResolution = DynamicDistanceResolution = input; 	 // set both default and dynamic min dist
 }
 
 
 double GetTemporaryTimeStep()
 {
-	return TemporaryTimestep;
+    return TemporaryTimestep;
 }
 
 
 void SetTemporaryTimeStep(double value)
 {
-	TemporaryTimestep = value;
+    TemporaryTimestep = value;
 }
 
 
 double GetActualTimeStep()
 {
-	return actual;
+    return actual;
 }
 
 void SetActualTimeStep(double input)
 {
-	actual = input;
+    actual = input;
 }
 
 double GetVisibleTimeStep()
 {
-	return visible;
+    return visible;
 }
 
 void SetVisibleTimeStep(double input)
 {
-	long nuvis = (long)(input / actual);
-	if (nuvis < 1)
-		nuvis = 1;
-	visible = nuvis * actual;
+    long nuvis = (long)(input / actual);
+    if (nuvis < 1)
+        nuvis = 1;
+    visible = nuvis * actual;
 }
 
 
 void SetSecondaryVisibleTimeStep(double input)
 {
-	secondaryvisible = input;
+    secondaryvisible = input;
 }
 
 
 double GetSecondaryVisibleTimeStep()
 {
-	return secondaryvisible;
+    return secondaryvisible;
 }
 
 
 double EventMinimumTimeStep(double time)
 {
-	// returns EventMinTimeStep if "time" is negative
-	if (time >= 0)
-		EventMinTimeStep = time;
+    // returns EventMinTimeStep if "time" is negative
+    if (time >= 0)
+        EventMinTimeStep = time;
 
-	return EventMinTimeStep;
+    return EventMinTimeStep;
 }
 
 
 bool CheckExpansions(long YesNo)
 {
-	if (YesNo > -1)
-		checkexpansions = YesNo;
+    if (YesNo > -1)
+        checkexpansions = YesNo;
 
-	return checkexpansions;
+    return checkexpansions;
 }
 
 
 bool CheckPostFrontal(long YesNo)
 {
-	if (YesNo > -1)
-		checkpostfrontal = YesNo;
+    if (YesNo > -1)
+        checkpostfrontal = YesNo;
 
-	return checkpostfrontal;
+    return checkpostfrontal;
 }
 
 
 long DistanceCheckMethod(long Method)
 {
-	if (Method >= 0)
-		DistanceMethod = Method;
+    if (Method >= 0)
+        DistanceMethod = Method;
 
-	return DistanceMethod;
+    return DistanceMethod;
 }
 
 
@@ -434,70 +434,70 @@ long DistanceCheckMethod(long Method)
 //------------------------------------------------------------------------------
 
 void GetPerimeter2(long coord, double* xpt, double* ypt, double* ros,
-	double* fli, double* rct)
+                   double* fli, double* rct)
 {
-	if (coord < p2numalloc)
-	{
-		coord *= NUMDATA;
-		*xpt = perimeter2[coord];
-		*ypt = perimeter2[++coord];
-		*ros = perimeter2[++coord];
-		*fli = perimeter2[++coord];
-		*rct = perimeter2[++coord];
-	}
+    if (coord < p2numalloc)
+    {
+        coord *= NUMDATA;
+        *xpt = perimeter2[coord];
+        *ypt = perimeter2[++coord];
+        *ros = perimeter2[++coord];
+        *fli = perimeter2[++coord];
+        *rct = perimeter2[++coord];
+    }
 }
 
 double GetPerimeter2Value(long coord, long value)
 {
-	if (coord < 0 || value < 0)
-		return (double) p2numalloc;
-	else if (perimeter2 && coord < p2numalloc)
-		return perimeter2[coord * NUMDATA + value];
+    if (coord < 0 || value < 0)
+        return (double) p2numalloc;
+    else if (perimeter2 && coord < p2numalloc)
+        return perimeter2[coord * NUMDATA + value];
 
-	return 0.0; //(double) p2numalloc
+    return 0.0; //(double) p2numalloc
 }
 
 void SetPerimeter2(long coord, double xpt, double ypt, double ros, double fli,
-	double rct)
+                   double rct)
 {
-	if (coord < p2numalloc)
-	{
-		coord *= NUMDATA;
-		perimeter2[coord] = xpt;
-		perimeter2[++coord] = ypt;
-		perimeter2[++coord] = ros;
-		perimeter2[++coord] = fli;
-		perimeter2[++coord] = rct;
-	}
+    if (coord < p2numalloc)
+    {
+        coord *= NUMDATA;
+        perimeter2[coord] = xpt;
+        perimeter2[++coord] = ypt;
+        perimeter2[++coord] = ros;
+        perimeter2[++coord] = fli;
+        perimeter2[++coord] = rct;
+    }
 }
 
 
 double* AllocPerimeter2(long NumPoints)
 {
-	if (NumPoints)
-	{
-		if (NumPoints >= p2numalloc)
-		{
-			FreePerimeter2();
-			nmemb = NumPoints * NUMDATA;
-			perimeter2 = new double[nmemb];
-			if (perimeter2 != NULL)
-				p2numalloc = NumPoints;
-		}
-	}
-	else
-		return NULL;
+    if (NumPoints)
+    {
+        if (NumPoints >= p2numalloc)
+        {
+            FreePerimeter2();
+            nmemb = NumPoints * NUMDATA;
+            perimeter2 = new double[nmemb];
+            if (perimeter2 != NULL)
+                p2numalloc = NumPoints;
+        }
+    }
+    else
+        return NULL;
 
-	return perimeter2;
+    return perimeter2;
 }
 
 
 void FreePerimeter2()
 {
-	if (perimeter2)
-		delete[] perimeter2;//GlobalFree(perimeter2);//free(perimeter2);
-	perimeter2 = 0;
-	p2numalloc = 0;
+    if (perimeter2)
+        delete[] perimeter2;//GlobalFree(perimeter2);//free(perimeter2);
+    perimeter2 = 0;
+    p2numalloc = 0;
 }
 
 
@@ -512,90 +512,90 @@ void FreePerimeter2()
 
 void FreeAllFirePerims()
 {
-	if (perimeter1)
-		delete[] perimeter1;
-	if (numpts)
-		delete[] numpts;
-	if (inout)
-		delete[] inout;
-	perimeter1 = 0;
-	numpts = 0;
-	inout = 0;
-	NumPerimAlloc = 0;
+    if (perimeter1)
+        delete[] perimeter1;
+    if (numpts)
+        delete[] numpts;
+    if (inout)
+        delete[] inout;
+    perimeter1 = 0;
+    numpts = 0;
+    inout = 0;
+    NumPerimAlloc = 0;
 }
 
 
 long GetNumPerimAlloc()
 {
-	return NumPerimAlloc;
+    return NumPerimAlloc;
 }
 
 
 bool AllocFirePerims(long num)
 {
-	FreeAllFirePerims();
-	perimeter1 = new double * [num];
-	if (perimeter1 == NULL)
-		return false;
-	numpts = new long[num];
-	if (numpts == NULL)
-		return false;
-	inout = new long[num];
-	if (inout == NULL)
-		return false;
-	NumPerimAlloc = num;
-	memset(perimeter1, 0x0, num * sizeof(double *));
-	memset(numpts, 0x0, num * sizeof(long));
-	memset(inout, 0x0, num * sizeof(long));
+    FreeAllFirePerims();
+    perimeter1 = new double * [num];
+    if (perimeter1 == NULL)
+        return false;
+    numpts = new long[num];
+    if (numpts == NULL)
+        return false;
+    inout = new long[num];
+    if (inout == NULL)
+        return false;
+    NumPerimAlloc = num;
+    memset(perimeter1, 0x0, num * sizeof(double *));
+    memset(numpts, 0x0, num * sizeof(long));
+    memset(inout, 0x0, num * sizeof(long));
 
-	return true;
+    return true;
 }
 
 
 bool ReAllocFirePerims()
 {
-	long i, OldNumAlloc;
-	long* newinout, * newnumpts;
-	double* temp1;
-	double** newperim1;
+    long i, OldNumAlloc;
+    long* newinout, * newnumpts;
+    double* temp1;
+    double** newperim1;
 
-	newperim1 = perimeter1;
-	newinout = inout;
-	newnumpts = numpts;
+    newperim1 = perimeter1;
+    newinout = inout;
+    newnumpts = numpts;
 
-	perimeter1 = 0;
-	inout = 0;
-	numpts = 0;
-	OldNumAlloc = NumPerimAlloc;
+    perimeter1 = 0;
+    inout = 0;
+    numpts = 0;
+    OldNumAlloc = NumPerimAlloc;
 
-	if (!AllocFirePerims(NumPerimAlloc + SIZE_FIREPERIM_BLOCK))
-		return false;
+    if (!AllocFirePerims(NumPerimAlloc + SIZE_FIREPERIM_BLOCK))
+        return false;
 
-	if (newinout)
-	{
-		memcpy(inout, newinout, OldNumAlloc * sizeof(long));
-		delete[] newinout;
-	}
-	if (newnumpts)
-	{
-		memcpy(numpts, newnumpts, OldNumAlloc * sizeof(long));
-		delete[] newnumpts;
-	}
+    if (newinout)
+    {
+        memcpy(inout, newinout, OldNumAlloc * sizeof(long));
+        delete[] newinout;
+    }
+    if (newnumpts)
+    {
+        memcpy(numpts, newnumpts, OldNumAlloc * sizeof(long));
+        delete[] newnumpts;
+    }
 
-	if (newperim1)
-	{
-		for (i = 0; i < OldNumAlloc; i++)
-		{
-			temp1 = perimeter1[i];
-			perimeter1[i] = newperim1[i];
-			if (numpts[i] > 0)
-				delete[] temp1;
-		}
-		delete[] newperim1;
-	}
+    if (newperim1)
+    {
+        for (i = 0; i < OldNumAlloc; i++)
+        {
+            temp1 = perimeter1[i];
+            perimeter1[i] = newperim1[i];
+            if (numpts[i] > 0)
+                delete[] temp1;
+        }
+        delete[] newperim1;
+    }
 
 
-	return true;
+    return true;
 }
 
 //------------------------------------------------------------------------------
@@ -608,181 +608,181 @@ bool ReAllocFirePerims()
 
 double* AllocPerimeter1(long NumFire, long NumPoints)
 {
-	//WaitForSingleObject(hNewPerimSemaphore, INFINITE);
-	if (NumPoints)
-	{
-		if (NumFire >= NumPerimAlloc)
-		{
-			if (ReAllocFirePerims() == false)
-			{
-				//ReleaseSemaphore(hNewPerimSemaphore, 1, &prevct);
+    //WaitForSingleObject(hNewPerimSemaphore, INFINITE);
+    if (NumPoints)
+    {
+        if (NumFire >= NumPerimAlloc)
+        {
+            if (ReAllocFirePerims() == false)
+            {
+                //ReleaseSemaphore(hNewPerimSemaphore, 1, &prevct);
 
-				return NULL;
-			}
-		}
-		nmemb = (NumPoints) * NUMDATA;			// add 1 to make room for bounding rectangle
-		if (perimeter1[NumFire] > 0)
-			FreePerimeter1(NumFire);
-		perimeter1[NumFire] = new double[nmemb];
+                return NULL;
+            }
+        }
+        nmemb = (NumPoints) * NUMDATA;			// add 1 to make room for bounding rectangle
+        if (perimeter1[NumFire] > 0)
+            FreePerimeter1(NumFire);
+        perimeter1[NumFire] = new double[nmemb];
 
-		if (perimeter1[NumFire] == NULL)
-		{
-			NumFire = -1;		// debugging
-			perimeter1[NumFire] = 0;
-			//ReleaseSemaphore(hNewPerimSemaphore, 1, &prevct);
+        if (perimeter1[NumFire] == NULL)
+        {
+            NumFire = -1;		// debugging
+            perimeter1[NumFire] = 0;
+            //ReleaseSemaphore(hNewPerimSemaphore, 1, &prevct);
 
-			return NULL;
-		}
-	}
-	//ReleaseSemaphore(hNewPerimSemaphore, 1, &prevct);
+            return NULL;
+        }
+    }
+    //ReleaseSemaphore(hNewPerimSemaphore, 1, &prevct);
 
-	return perimeter1[NumFire];
+    return perimeter1[NumFire];
 }
 
 void FreePerimeter1(long NumFire)
 {
-	if (perimeter1[NumFire])
-	{
-		delete[] perimeter1[NumFire];
-		perimeter1[NumFire] = 0;
-	}
+    if (perimeter1[NumFire])
+    {
+        delete[] perimeter1[NumFire];
+        perimeter1[NumFire] = 0;
+    }
 }
 
 double GetPerimeter1Value(long NumFire, long NumPoint, int coord)
 {
-	if (perimeter1[NumFire])
-		return perimeter1[NumFire][NumPoint * NUMDATA + coord];
+    if (perimeter1[NumFire])
+        return perimeter1[NumFire][NumPoint * NUMDATA + coord];
 
-	return 0.0;
+    return 0.0;
 }
 
 
 double* GetPerimeter1Address(long NumFire, long NumPoint)
 {
-	return &perimeter1[NumFire][NumPoint * NUMDATA];
+    return &perimeter1[NumFire][NumPoint * NUMDATA];
 }
 
 
 void SetPerimeter1(long NumFire, long NumPoint, double xpt, double ypt)
 {
-	//	WaitForSingleObject(hNewPerimSemaphore, INFINITE);
-	NumPoint *= NUMDATA;
-	perimeter1[NumFire][NumPoint] = xpt;
-	perimeter1[NumFire][NumPoint + 1] = ypt;
-	//	ReleaseSemaphore(hNewPerimSemaphore, 1, &prevct);
+    //	WaitForSingleObject(hNewPerimSemaphore, INFINITE);
+    NumPoint *= NUMDATA;
+    perimeter1[NumFire][NumPoint] = xpt;
+    perimeter1[NumFire][NumPoint + 1] = ypt;
+    //	ReleaseSemaphore(hNewPerimSemaphore, 1, &prevct);
 }
 
 void SetFireChx(long NumFire, long NumPoint, double ros, double fli)
 {
-	//	WaitForSingleObject(hNewPerimSemaphore, INFINITE);
-	NumPoint *= NUMDATA;
-	perimeter1[NumFire][NumPoint + 2] = ros;
-	perimeter1[NumFire][NumPoint + 3] = fli;
-	//	ReleaseSemaphore(hNewPerimSemaphore, 1, &prevct);
+    //	WaitForSingleObject(hNewPerimSemaphore, INFINITE);
+    NumPoint *= NUMDATA;
+    perimeter1[NumFire][NumPoint + 2] = ros;
+    perimeter1[NumFire][NumPoint + 3] = fli;
+    //	ReleaseSemaphore(hNewPerimSemaphore, 1, &prevct);
 }
 
 void SetReact(long NumFire, long NumPoint, double react)
 {
-	//	WaitForSingleObject(hNewPerimSemaphore, INFINITE);
-	perimeter1[NumFire][NumPoint * NUMDATA + 4] = react;
-	//	ReleaseSemaphore(hNewPerimSemaphore, 1, &prevct);
+    //	WaitForSingleObject(hNewPerimSemaphore, INFINITE);
+    perimeter1[NumFire][NumPoint * NUMDATA + 4] = react;
+    //	ReleaseSemaphore(hNewPerimSemaphore, 1, &prevct);
 }
 
 long SwapFirePerims(long NumFire1, long NumFire2)
 {
-	double* TempFire;
-	long TempInout, TempNum;
+    double* TempFire;
+    long TempInout, TempNum;
 
-	if (NumFire1 >= 0 && NumFire2 >= 0) 		// two fires in perim1
-	{
-		TempFire = perimeter1[NumFire2];
-		perimeter1[NumFire2] = perimeter1[NumFire1];
-		perimeter1[NumFire1] = TempFire;
-		TempInout = inout[NumFire2];
-		inout[NumFire2] = inout[NumFire1];
-		inout[NumFire1] = TempInout;
-		TempNum = numpts[NumFire2];
-		numpts[NumFire2] = numpts[NumFire1];
-		numpts[NumFire1] = TempNum;
+    if (NumFire1 >= 0 && NumFire2 >= 0) 		// two fires in perim1
+    {
+        TempFire = perimeter1[NumFire2];
+        perimeter1[NumFire2] = perimeter1[NumFire1];
+        perimeter1[NumFire1] = TempFire;
+        TempInout = inout[NumFire2];
+        inout[NumFire2] = inout[NumFire1];
+        inout[NumFire1] = TempInout;
+        TempNum = numpts[NumFire2];
+        numpts[NumFire2] = numpts[NumFire1];
+        numpts[NumFire1] = TempNum;
 
-		return 1;
-	}
-	else if (NumFire1 < 0 && NumFire2 >= 0)
-	{
-		AllocPerimeter2(numpts[NumFire2]);
-		if (memmove(perimeter2, perimeter1[NumFire2],
-				numpts[NumFire2] * NUMDATA * sizeof(double)))
-			return 1;
-		else
-			return 0;
-	}
-	else if (NumFire1 >= 0 && NumFire2 < 0)
-	{
-		if (perimeter1[NumFire1])
-		{
-			if (memmove(perimeter1[NumFire1], perimeter2,
-					(NumFire2 * -1) * NUMDATA * sizeof(double)))
-				return 1;
-		}
-		return 0;
-	}
+        return 1;
+    }
+    else if (NumFire1 < 0 && NumFire2 >= 0)
+    {
+        AllocPerimeter2(numpts[NumFire2]);
+        if (memmove(perimeter2, perimeter1[NumFire2],
+                    numpts[NumFire2] * NUMDATA * sizeof(double)))
+            return 1;
+        else
+            return 0;
+    }
+    else if (NumFire1 >= 0 && NumFire2 < 0)
+    {
+        if (perimeter1[NumFire1])
+        {
+            if (memmove(perimeter1[NumFire1], perimeter2,
+                        (NumFire2 * -1) * NUMDATA * sizeof(double)))
+                return 1;
+        }
+        return 0;
+    }
 
-	return 0;
+    return 0;
 }
 
 
 void AllocElev(long CurrentFire)
 {
-	nmemb = numpts[CurrentFire];
-	if (nmemb >= (unsigned long) numelev)
-	{
-		FreeElev();
-		GroundElev = new long[nmemb];
-		numelev = nmemb;
-	}
+    nmemb = numpts[CurrentFire];
+    if (nmemb >= (unsigned long) numelev)
+    {
+        FreeElev();
+        GroundElev = new long[nmemb];
+        numelev = nmemb;
+    }
 }
 
 
 void SetElev(long Num, long elev)
 {
-	if (Num >= numelev)
-	{
-		long* tempelev;
+    if (Num >= numelev)
+    {
+        long* tempelev;
 
-		tempelev = new long[numelev];
-		memcpy(tempelev, GroundElev, numelev * sizeof(long));
-		delete[] GroundElev;
-		GroundElev = new long[numelev * 2];
-		memcpy(GroundElev, tempelev, numelev * sizeof(long));
-		numelev *= 2;
-		delete[] tempelev;
-	}
-	GroundElev[Num] = elev;
+        tempelev = new long[numelev];
+        memcpy(tempelev, GroundElev, numelev * sizeof(long));
+        delete[] GroundElev;
+        GroundElev = new long[numelev * 2];
+        memcpy(GroundElev, tempelev, numelev * sizeof(long));
+        numelev *= 2;
+        delete[] tempelev;
+    }
+    GroundElev[Num] = elev;
 }
 
 
 long GetElev(long Num)
 {
-	if (!GroundElev)
-		return (long) NULL;
+    if (!GroundElev)
+        return (long) NULL;
 
-	return GroundElev[Num];
+    return GroundElev[Num];
 }
 
 long* GetElevAddress(long Num)
 {
-	if (!GroundElev)
-		return (long) NULL;
+    if (!GroundElev)
+        return (long) NULL;
 
-	return &GroundElev[Num];
+    return &GroundElev[Num];
 }
 
 void FreeElev()
 {
-	if (GroundElev)
-		delete[] GroundElev;//GlobalFree(GroundElev);//free(GroundElev);
-	GroundElev = 0;
-	numelev = 0;
+    if (GroundElev)
+        delete[] GroundElev;//GlobalFree(GroundElev);//free(GroundElev);
+    GroundElev = 0;
+    numelev = 0;
 }
 
 
@@ -797,64 +797,64 @@ void FreeElev()
 
 long SetStopLocation(double xcoord, double ycoord)
 {
-	if (NumStopLocations < MAXNUM_STOPLOCATIONS)
-	{
-		StopLocation[NumStopLocations * 2] = xcoord;
-		StopLocation[NumStopLocations * 2 + 1] = ycoord;
-		StopEnabled[NumStopLocations] = true;
-	}
-	else
-		return 0;
+    if (NumStopLocations < MAXNUM_STOPLOCATIONS)
+    {
+        StopLocation[NumStopLocations * 2] = xcoord;
+        StopLocation[NumStopLocations * 2 + 1] = ycoord;
+        StopEnabled[NumStopLocations] = true;
+    }
+    else
+        return 0;
 
-	return ++NumStopLocations;
+    return ++NumStopLocations;
 }
 
 bool GetStopLocation(long StopNum, double* xcoord, double* ycoord)
 {
-	if (StopNum < MAXNUM_STOPLOCATIONS)
-	{
-		*xcoord = StopLocation[StopNum * 2];
-		*ycoord = StopLocation[StopNum * 2 + 1];
-	}
-	if (StopEnabled[StopNum])
-		return true;
+    if (StopNum < MAXNUM_STOPLOCATIONS)
+    {
+        *xcoord = StopLocation[StopNum * 2];
+        *ycoord = StopLocation[StopNum * 2 + 1];
+    }
+    if (StopEnabled[StopNum])
+        return true;
 
-	return false;
+    return false;
 }
 
 
 void ResetStopLocation(long StopNum)
 {
-	if (StopNum < NumStopLocations)
-	{
-		memcpy(&StopLocation[StopNum * 2],
-			&StopLocation[(StopNum + 1) * 2],
-			(NumStopLocations - StopNum - 1) * sizeof(double) * 2);
-		memcpy(&StopEnabled[StopNum], &StopEnabled[StopNum + 1],
-			(NumStopLocations - StopNum - 1) * sizeof(bool));
-		NumStopLocations--;
-	}
+    if (StopNum < NumStopLocations)
+    {
+        memcpy(&StopLocation[StopNum * 2],
+               &StopLocation[(StopNum + 1) * 2],
+               (NumStopLocations - StopNum - 1) * sizeof(double) * 2);
+        memcpy(&StopEnabled[StopNum], &StopEnabled[StopNum + 1],
+               (NumStopLocations - StopNum - 1) * sizeof(bool));
+        NumStopLocations--;
+    }
 }
 
 
 bool EnableStopLocation(long StopNum, long Action)
 {
-	if (Action >= 0 && StopNum < NumStopLocations)
-		StopEnabled[StopNum] = (bool) Action;
+    if (Action >= 0 && StopNum < NumStopLocations)
+        StopEnabled[StopNum] = (bool) Action;
 
-	return (bool) StopEnabled[StopNum];
+    return (bool) StopEnabled[StopNum];
 }
 
 
 void ResetAllStopLocations()
 {
-	NumStopLocations = 0;
-	memset(StopEnabled, 0x0, MAXNUM_STOPLOCATIONS * sizeof(bool));
+    NumStopLocations = 0;
+    memset(StopEnabled, 0x0, MAXNUM_STOPLOCATIONS * sizeof(bool));
 }
 
 long GetNumStopLocations()
 {
-	return NumStopLocations;
+    return NumStopLocations;
 }
 
 

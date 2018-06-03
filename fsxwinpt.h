@@ -1,22 +1,22 @@
 /*
  * NOTICE OF RELEASE TO THE PUBLIC DOMAIN
  *
- * This work was created using public funds by employees of the 
- * USDA Forest Service's Fire Science Lab and Systems for Environmental 
- * Management.  It is therefore ineligible for copyright under title 17, 
- * section 105 of the United States Code.  You may treat it as you would 
- * treat any public domain work: it may be used, changed, copied, or 
- * redistributed, with or without permission of the authors, for free or 
- * for compensation.  You may not claim exclusive ownership of this code 
- * because it is already owned by everyone.  Use this software entirely 
+ * This work was created using public funds by employees of the
+ * USDA Forest Service's Fire Science Lab and Systems for Environmental
+ * Management.  It is therefore ineligible for copyright under title 17,
+ * section 105 of the United States Code.  You may treat it as you would
+ * treat any public domain work: it may be used, changed, copied, or
+ * redistributed, with or without permission of the authors, for free or
+ * for compensation.  You may not claim exclusive ownership of this code
+ * because it is already owned by everyone.  Use this software entirely
  * at your own risk.  No warranty of any kind is given.
- * 
- * FARSITE is a trademark owned by Mark Finney.  You may not call derived 
+ *
+ * FARSITE is a trademark owned by Mark Finney.  You may not call derived
  * works by the name FARSITE without explicit written permission.
- * 
- * A copy of 17-USC-105 should have accompanied this distribution in the file 
- * 17USC105.html.  If not, you may access the law via the US Government's 
- * public websites: 
+ *
+ * A copy of 17-USC-105 should have accompanied this distribution in the file
+ * 17USC105.html.  If not, you may access the law via the US Government's
+ * public websites:
  *   - http://www.copyright.gov/title17/92chap1.html#105
  *   - http://www.gpoaccess.gov/uscode/  (enter "17USC105" in the search box.)
  */
@@ -77,92 +77,92 @@ struct FileChanged
 
 struct FarInputs
 {
-  private:
-  static const int FILE_LEN = 256 ; 
+private:
+    static const int FILE_LEN = 256 ;
 
-  public:
-	char BookmarkFile[FILE_LEN];
-	char LandscapeFile[FILE_LEN];
-	char ProjectFile[FILE_LEN];
-	char AdjustmentFile[FILE_LEN];
-	char FuelMoistureFile[FILE_LEN];
-	char ConvertFile[FILE_LEN];
-	char FuelModelFile[FILE_LEN];
-	char WeatherFile[5][FILE_LEN];
-	char WindFile[5][FILE_LEN];
-	char BurnPeriod[FILE_LEN];
-	char CoarseWoody[FILE_LEN];
-	char MBLand[64], MBWtr[5][64], MBWnd[5][64];
-	char MBAdj[64], MBMois[64], MBConv[64], MBFuelMods[64], MBBpd[64],
-		MBCwd[64];
-	bool LandID, WtrID, WndID, AdjID, FuelMoisID, BpdID, CwdID;
-	bool SVGA_ON;
- 	char pathdiv[1];
-	bool inited;
-	bool m_shapeFileInited;
-	bool m_gridEastNorthSet;
-	bool m_gridRowSet;
-	char m_GridRow[256];
-	char m_eastNorth[256];
-	int  m_BurnPeriodIsHere;
-	int  version;
-	int  m_dcount;
-	long GridInterval;
-	//FileChanged Changes;
-	//TWindow *Client;
-	FILE* CurrentFile;
+public:
+    char BookmarkFile[FILE_LEN];
+    char LandscapeFile[FILE_LEN];
+    char ProjectFile[FILE_LEN];
+    char AdjustmentFile[FILE_LEN];
+    char FuelMoistureFile[FILE_LEN];
+    char ConvertFile[FILE_LEN];
+    char FuelModelFile[FILE_LEN];
+    char WeatherFile[5][FILE_LEN];
+    char WindFile[5][FILE_LEN];
+    char BurnPeriod[FILE_LEN];
+    char CoarseWoody[FILE_LEN];
+    char MBLand[64], MBWtr[5][64], MBWnd[5][64];
+    char MBAdj[64], MBMois[64], MBConv[64], MBFuelMods[64], MBBpd[64],
+         MBCwd[64];
+    bool LandID, WtrID, WndID, AdjID, FuelMoisID, BpdID, CwdID;
+    bool SVGA_ON;
+    char pathdiv[1];
+    bool inited;
+    bool m_shapeFileInited;
+    bool m_gridEastNorthSet;
+    bool m_gridRowSet;
+    char m_GridRow[256];
+    char m_eastNorth[256];
+    int  m_BurnPeriodIsHere;
+    int  version;
+    int  m_dcount;
+    long GridInterval;
+    //FileChanged Changes;
+    //TWindow *Client;
+    FILE* CurrentFile;
 
-	FarInputs();
-	void ResetData();
-	void InitializeLandscapeFile();
-	bool LoadWeatherData(long FileNum);
-	bool LoadWindData(long FileNum);
-	bool LoadAdjustmentFile();
-	bool LoadFuelMoistureFile();
-	bool LoadCustomModelFile();
-	bool LoadConversionFile();
-	bool LoadBurnPeriodFile();
-	bool LoadCoarseWoodyFile(char* ErrMsg);
-	bool TestProjectFileVersion();
-	bool OpenVersion1ProjectFile();
-	bool OpenVersion2ProjectFile();
-	bool OpenVersion4ProjectFile();
-	void MakeProjectFile();
-	void WriteWeatherWindProject();
-	bool TestForAtmWeather();
-	bool TestForAtmWinds();
+    FarInputs();
+    void ResetData();
+    void InitializeLandscapeFile();
+    bool LoadWeatherData(long FileNum);
+    bool LoadWindData(long FileNum);
+    bool LoadAdjustmentFile();
+    bool LoadFuelMoistureFile();
+    bool LoadCustomModelFile();
+    bool LoadConversionFile();
+    bool LoadBurnPeriodFile();
+    bool LoadCoarseWoodyFile(char* ErrMsg);
+    bool TestProjectFileVersion();
+    bool OpenVersion1ProjectFile();
+    bool OpenVersion2ProjectFile();
+    bool OpenVersion4ProjectFile();
+    void MakeProjectFile();
+    void WriteWeatherWindProject();
+    bool TestForAtmWeather();
+    bool TestForAtmWinds();
 
- 	//old load project file replacement functions	
-	bool intializeDir(char* Name);
-	bool setWeatherFile(int WeatherFileNum, const char* weatherFileName);
-	bool setWindFile(int WindFileNum, const char* WindFileName);
-	bool setLandscapeFile(const char* value);
-	void initWindAndWeather();
-	bool loadUpAdjustmentsFile(const char* adjFileName);
-	bool loadUpMoistureFile(const char* moistureFile);
-	bool loadUpFuelModelFile(const char* moistureFile);
-	bool loadUpConversionFile(const char* ConvertFile);
-	bool loadUpCoarseWoodyFile(const char* CoarseWoody);
-	bool loadUpBurnPeriodFile(const char* FileName1);
-	void saveGridEastNorth(char* eastNorth);
-	void saveGridRow(char* GridRow);
-	bool loadUpEastNorth(char* eastNorth, char* GridRow);
-	bool loadUpLandscapeTheme(const char* FileName1);
-	void initShapeFileLoad();
-	bool loadUpShapeFile(char* shapefile);
-	bool loadUpStoredVector(char* storedVectorFile);
-	bool loadUpSetDirection(char* value,char direction);
-	bool loadUpCanopyCheck(char* value);
+    //old load project file replacement functions
+    bool intializeDir(char* Name);
+    bool setWeatherFile(int WeatherFileNum, const char* weatherFileName);
+    bool setWindFile(int WindFileNum, const char* WindFileName);
+    bool setLandscapeFile(const char* value);
+    void initWindAndWeather();
+    bool loadUpAdjustmentsFile(const char* adjFileName);
+    bool loadUpMoistureFile(const char* moistureFile);
+    bool loadUpFuelModelFile(const char* moistureFile);
+    bool loadUpConversionFile(const char* ConvertFile);
+    bool loadUpCoarseWoodyFile(const char* CoarseWoody);
+    bool loadUpBurnPeriodFile(const char* FileName1);
+    void saveGridEastNorth(char* eastNorth);
+    void saveGridRow(char* GridRow);
+    bool loadUpEastNorth(char* eastNorth, char* GridRow);
+    bool loadUpLandscapeTheme(const char* FileName1);
+    void initShapeFileLoad();
+    bool loadUpShapeFile(char* shapefile);
+    bool loadUpStoredVector(char* storedVectorFile);
+    bool loadUpSetDirection(char* value,char direction);
+    bool loadUpCanopyCheck(char* value);
 
 
-	bool SaveWtr(long Station);
-	bool SaveWnd(long Station);
-	bool SaveAdj();
-	bool SaveFms();
-	bool SaveCnv();
-	bool SaveFmd();
-	bool SaveBpd();
-	bool SaveCwd();
+    bool SaveWtr(long Station);
+    bool SaveWnd(long Station);
+    bool SaveAdj();
+    bool SaveFms();
+    bool SaveCnv();
+    bool SaveFmd();
+    bool SaveBpd();
+    bool SaveCwd();
 };
 
 
