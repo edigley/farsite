@@ -2906,26 +2906,23 @@ bool TFarsiteInterface::PreCalculateFuelMoistures()
 }
 
 
-void TFarsiteInterface::FarsiteSimulationLoop()
+void TFarsiteInterface::FarsiteSimulationLoop() {
 // THIS FUNCTION ACTIVATES THE FARSITE LOOP AND CHECKS FOR MESSAGES BETWEEN ITERATIONS
-{
     CheckSteps();						// check visual and actual timestep for changes
     systime1 = clock();
     systime2 = systime1 + 1;					// keep systime2-systime1>0.0
 
     //ResetEvent(hWaitEvent);
 
-    if (RESUMEL)
-    {
+    if (RESUMEL) {
         LoadLastState();
         printf("Previous State Execution Loaded!\n");
     }
-    printf("Simulation State:\n");
-    while (burn.SIMTIME <= maximum)
-    {
+    //-> printf("INFO: Farsite4.TFarsiteInterface::FarsiteSimulationLoop: Simulation State:\n");
+    while (burn.SIMTIME <= maximum) {
         //printf("SIMTIME %d of %d\n",burn.SIMTIME,maximum);
         //fflush(stdout);
-        printf("%d %d\n",int(burn.SIMTIME),maximum);
+        //-> printf("INFO: Farsite4.TFarsiteInterface::FarsiteSimulationLoop: %d %d\n", int(burn.SIMTIME), maximum);
         //printf("\r %d Percent done  ",(int)(burn.SIMTIME*100/maximum));
         if (LEAVEPROCESS)				// allows exit from FARSITE process control
             break;

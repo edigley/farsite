@@ -41,8 +41,7 @@ migrated the win api memset, memove and memcpy to ansi C equivalents.
 //---------------------------------------------------------------------------
 static void PrintHelp();
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
     char BookMarkArg[256] = "";
     char FarsiteDirectory[256] = "";
     char pathdiv[] = "\\"; // search for path
@@ -57,7 +56,6 @@ int main(int argc, char* argv[])
     int startTime=0;
     char o;
     int timeCounter=0;
-		//	printf("Farsite modified version execution!\n");
     FILE *TimeFile;
     struct rlimit rl;
     struct rlimit lc;
@@ -69,10 +67,8 @@ int main(int argc, char* argv[])
     int worker=0;
     int setLimit=0;
 
-    if (argc >=2)
-    {
-        while ((o = getopt (argc, argv, "i:r:s:t:l:f:g:n:w:p:")) != -1)
-        {
+    if (argc >=2) {
+        while ((o = getopt (argc, argv, "i:r:s:t:l:f:g:n:w:p:")) != -1) {
             switch (o)
             {
             case 'i':
@@ -115,72 +111,48 @@ int main(int argc, char* argv[])
                 break;
             }
         }
-    }
-    else
-    {
+    } else {
         PrintHelp();
         return 0;
     }
-		#ifdef _OPENMP
-    if (cores==0)
-    {
+	#ifdef _OPENMP
+    if (cores==0) {
         printf("No number of cores specified, using max available.\n");
         cores=omp_get_max_threads();
     }
     omp_set_num_threads(cores);
-		#endif
-    // printf("Using %d threads\n",threads);
-    //Check files from input
-    // printf("/------------------------------------/\nChecking files...\n");
-    if(!(access(settingsfile,F_OK)==0))
-    {
+	#endif
+
+    if(!(access(settingsfile,F_OK)==0)) {
         printf("Non existent setting file or no access.\n");
         return 0;
     }
 
-    if(resumeL && !(access(resumeFile,F_OK)==0))
-    {
+    if(resumeL && !(access(resumeFile,F_OK)==0)) {
         printf("Non existent resume file or no access.\n");
         return 0;
     }
 
-    if (strlen(argv[0]) != 0)
-    {
+    if (strlen(argv[0]) != 0) {
         strcpy(FarsiteDirectory, argv[0]);
         strrev(FarsiteDirectory);
         len = strcspn(FarsiteDirectory, pathdiv);
         memset(FarsiteDirectory, 0x0, 256 * sizeof(char));
         strncpy(FarsiteDirectory, argv[0], strlen(argv[0]) - len);
-    }
-    else
-    {
+    } else {
         getcwd(FarsiteDirectory,512);
     }
-    //	TFarsiteInterface farsite=TFarsiteInterface("FARSITE 4.0", FarsiteDirectory, BookMarkArg).InitMainWindow();
+
     TFarsiteInterface farsite = TFarsiteInterface("FARSITE 4.0",FarsiteDirectory, BookMarkArg);
-    /* if(argc>=2){
-             if(!(access(argv[1],04)==0)){
-                     printf("non existent settings file or no access\n");
-    	return 0;
-             }
-     	farsite.SetInputsFromFile(argv[1]);
-    //		printf("%s\n",argv[1]);
-     }else{*/
+
     farsite.SetInputsFromFile(settingsfile);
-		// 	long tID;
-		//
-		//	Sample_Init();
-    //tID=1;
-		//	Sample_SetCPU(tID);
-		//	Sample_ON(tID);
-		//	printf("Setting file:%s\n",settingsfile);
-    if(resumeL) printf("Resume file input:%s\n",resumeFile);
-    if(resumeS) printf("Resume file output:%s\n",SaveFileName);
-    //printf("OK!\n/------------------------------------/\n");
+
+    if(resumeL) { printf("Resume file input:%s\n",resumeFile); }
+    if(resumeS) { printf("Resume file output:%s\n",SaveFileName); }
+
     lc.rlim_cur = lc.rlim_max = 0;
     setrlimit(RLIMIT_CORE,&lc);
-    if (setLimit)
-    {
+    if (setLimit) {
         setrlimit (RLIMIT_CPU, &rl);
     }
     TimeCounter::Instance()->startTS();
@@ -188,34 +160,16 @@ int main(int argc, char* argv[])
     farsite.InitMainWindow();
     farsite.Terminate();
     TimeCounter::Instance()->stopTS();
-		// 	Sample_OFF(tID);
-		// 	Sample_End();
-    //farsite.sIgn();
+
     fflush(stdout);
 
-		// 	TimeCounter::Instance()->startT();
-		// 	sleep(4);
-		// 	TimeCounter::Instance()->stopT();
-    if( timeCounter )
-    {
-        /*
-        	  if(( TimeFile = fopen( TimeFileName, "w+")) == NULL) {
-                        puts("Error creating time counter file.");
-                        exit( 0 );
-        	  }
-        */
-      printf("FARSITE:%d_%d_%d_%f_%f_%d_%s\n",generation,n,cores,TimeCounter::Instance()->getTimeS(),TimeCounter::Instance()->getTime(),worker,resolution);
-			// fprintf(TimeFile, "%d",TimeCounter::Instance()->getTime());
-			// printf("Parallel time: %d\n",TimeCounter::Instance()->getTime());
-			// printf("Serial time: %d\n",(time(NULL)-startTime)-(TimeCounter::Instance()->getTime()));
-			// printf("Execution time:%d\n",time(NULL)-startTime);
-			// fclose(TimeFile);
+    if( timeCounter ) {
+        //-> printf("FARSITE:%d_%d_%d_%f_%f_%d_%s\n",generation,n,cores,TimeCounter::Instance()->getTimeS(),TimeCounter::Instance()->getTime(),worker,resolution);
     }
     return 0;
 }
 
-static void PrintHelp()
-{
+static void PrintHelp() {
     printf("Help:\n");
     printf("farsite4 -i SettingsFileName -r ResumeFileInput -s ResumeFileOutput -p resolution -w worker -l limit -f cores -g generation -n individuo \n");
 }
